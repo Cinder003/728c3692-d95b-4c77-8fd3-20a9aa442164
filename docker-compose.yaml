@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: ./Backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./Backend/data:/usr/src/app/data
+    env_file:
+      - ./Backend/.env
+    environment:
+      - NODE_ENV=production
+
+  frontend:
+    build: ./Front-end
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    environment:
+      - NODE_ENV=production
